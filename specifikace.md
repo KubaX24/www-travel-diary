@@ -12,7 +12,7 @@ Návrh diagramů v programu FigJam: [https://www.figma.com/board/J8zs0yoSv4JbrZ9
 
 ![diagram.png](specifikace_img/diagram.png)
 
-### Specifikace uživatelských rolý
+### Specifikace uživatelských rolí
 
 V aplikaci se nachází pouze jedna role, která dokáže vše podle UseCase diagramu.
 
@@ -22,7 +22,7 @@ Návrh v programu Figma: [https://www.figma.com/design/tODsBuWfOf6cNPQ1Y5AyXm/N%
 
 ![navrh.png](specifikace_img/navrh.png)
 
-UI se bude zkládat ze 4 hlavních částí (viz. první návrh):
+UI se bude skládat ze 4 hlavních částí (viz. první návrh):
 1. Jméno deníku a jeho změna \
 Bude ukazovat název a po kliknutí se otevře nabídka (viz. třetí návrh), kde se bude moc vybrat deník, do kterého se budeme chtít podívat, vytvořit nový deník (tlačítko plus) nebo ho exportovat (tlačítko se šipkou u souboru u daného deníku)/importovat (tlačítko se šipkou u souboru vedle tlačítka plus).
 
@@ -30,10 +30,10 @@ Bude ukazovat název a po kliknutí se otevře nabídka (viz. třetí návrh), k
 Ukáže mapu všech míst, které jsou uložené v daném deníku, po kliknutí na specifické místo se zobrazí detaily v pravém boxu.
 
 3. Celkem KM \
-Ukáže nám celkkový nachozený počet kilometrů v celém deníku a i progres podle námi nastaveného cíle.
+Ukáže nám celkový nachozený počet kilometrů v celém deníku a i progres podle námi nastaveného cíle.
 
 4. Detaily o místě \
-Ukáže nám název, popis a počet nachozených kilometrů o specifickém místě, které vyberem na mapě.
+Ukáže nám název, popis a počet nachozených kilometrů o specifickém místě, které vybereme na mapě.
 
 
 
