@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    background: radial-gradient(circle 300px at 100px 100px, rgba(41, 191, 18, 0.3), var(--dark)), var(--dark);
+}
+
+main {
+    display: flex;
+    gap: 4px;
+    width: calc(100% - 8px);
+    height: calc(100vh - 8px);
+
+    padding: 4px;
+
+    h1 {
+        margin: 16px;
+    }
+
+    #header-map-container {
+        width: 100%;
+        display: flex;
+        gap: 4px;
+        flex-direction: column;
+
+        header {
+
+        }
+
+        #map {
+            height: 100%;
+        }
+    }
+
+    #km-detail-container {
+        width: 30vw;
+        display: flex;
+        gap: 4px;
+        flex-direction: column;
+
+        #km {
+
+        }
+
+        #detail {
+            height: 100%;
+        }
+    }
+
+    #detail, #map {
+        color: var(--dark);
+        border-radius: 8px;
+
+        border: 2px solid transparent;
+    }
+
+    #map {
+        background: linear-gradient(var(--light), var(--light)) padding-box,
+                    linear-gradient(to top, #819182 90%, var(--green)) border-box;
+    }
+
+    #detail {
+        background: linear-gradient(var(--light), var(--light)) padding-box,
+                    radial-gradient(circle 200px at 0px 0px, var(--green), #819182) border-box;
+    }
+
+    #km, header {
+        color: var(--light);
+    }
+
+}

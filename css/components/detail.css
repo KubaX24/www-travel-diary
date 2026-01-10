@@ -1,0 +1,10 @@
+#detail {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    h2, p {
+        margin: 0;
+    }
+}

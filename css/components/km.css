@@ -1,0 +1,49 @@
+#km {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin: 8px 4px;
+
+    #km-info {
+        display: flex;
+        width: 100%;
+        align-items: center;
+
+        i {
+            font-size: 3rem;
+        }
+
+        #km-progress{
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            width: 100%;
+
+            h3 {
+                font-size: 2rem;
+                margin: 0;
+            }
+
+            #km-progress-bar {
+                height: 4px;
+                width: 90%;
+                border-radius: 4px;
+                margin: 4px;
+                background-color: var(--light);
+
+                z-index: 5;
+
+                &::before {
+                    position: fixed;
+
+                    content: ' ';
+                    z-index: 10;
+                    height: 4px;
+                    width: calc(calc(18.5% / 100) * var(--km-percentage));
+                    border-radius: 4px;
+                    background-color: var(--green);
+                }
+            }
+        }
+    }
+}
