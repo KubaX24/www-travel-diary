@@ -1,5 +1,5 @@
-import {Place} from "./entities/place.js";
-import {Diary} from "./entities/diary.js";
+import {Place} from "../entities/place.js";
+import {Diary} from "../entities/diary.js";
 
 export class MyDB {
 
@@ -120,10 +120,13 @@ export class MyDB {
             const os = transaction.objectStore(this.#osDiary);
             os.get(id).onsuccess = (event) => {
                 const result = event.target.result;
-                console.log(result)
-                const diary = new Diary(result.name, result.author, result.goalKm, result.id);
 
-                resolve(diary);
+                try {
+                    const diary = new Diary(result.name, result.author, result.goalKm, result.id);
+                    resolve(diary);
+                } catch (e) {
+                    reject(e);
+                }
             }
         })
     }

@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background: radial-gradient(circle 300px at 100px 100px, rgba(41, 191, 18, 0.3), var(--dark)), var(--dark);
+    background-repeat: no-repeat;
 }
 
 main {
@@ -66,4 +67,10 @@ main {
         color: var(--light);
     }
 
+}
+
+#export-content {
+    color: var(--light);
+    margin: 16px;
+    height: 90vh;
 }
