@@ -45,10 +45,21 @@ export class DiariesDialog {
     }
 
     async opnDiaryCreated() {
+        const name = document.getElementById("dialog-diary-name").value;
+        const author = document.getElementById("dialog-diary-author").value;
+        const goalKm = Number.parseInt(document.getElementById("dialog-diary-goal-km").value);
+
+        if (name === "" || author === "" || isNaN(goalKm) || goalKm < 0) return;
+
+        const diaries = await this.getDiaries()
+        if (diaries.some(d => d.name === name)) return alert(
+            "Diary with this name already exists"
+        )
+
         const newDiary = new Diary(
-            document.getElementById("dialog-diary-name").value,
-            document.getElementById("dialog-diary-author").value,
-            document.getElementById("dialog-diary-goal-km").value
+            name,
+            author,
+            goalKm
         )
 
         newDiary.id = await this.#db.addDiary(newDiary);
@@ -115,6 +126,7 @@ export class DiariesDialog {
                         <input type="number" id="dialog-diary-goal-km">
                     </div>
                     <button type="button" data-select="-1" class="dialog-submit">Create</button>
+                    <hr>
                 </form>
                 
                 <h3 id="show-import-diary"><i class="fa-solid fa-angle-right"></i> Import diary</h3>
@@ -124,6 +136,7 @@ export class DiariesDialog {
                         <textarea id="dialog-diary-json"></textarea>
                     </div>
                     <button type="button" data-select="-2" class="dialog-submit">Import</button>
+                    <hr>
                 </form>
             `
 

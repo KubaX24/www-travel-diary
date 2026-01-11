@@ -6,12 +6,14 @@
 @import "components/detail.css";
 @import "components/km.css";
 @import "components/dialog.css";
+@import "components/add-place.css";
 
 :root {
     --light: #EBEDF4;
     --dark: #1A1E2B;
     --green: #29BF12;
-    ---light-green: #ABFF4F;
+    --light-green: #ABFF4F;
+    --green-gray: rgba(41, 191, 18, 0.3);
 }
 
 body {
@@ -28,4 +30,43 @@ h1 {
 
 h2 {
     font-size: 2rem;
+}
+
+button {
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 1rem;
+
+    background-color: var(--green);
+    color: var(--dark);
+
+    font-weight: 500;
+
+    border: var(--green-gray) solid 2px;
+}
+
+input, textarea {
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 1rem;
+
+    border: var(--green-gray) solid 2px;
+    background-color: var(--light);
+
+    &:focus {
+        outline: none;
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--light);
+    border-radius: 10px;
 }

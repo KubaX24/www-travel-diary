@@ -8,6 +8,7 @@
         display: flex;
         width: 100%;
         align-items: center;
+        gap: 32px;
 
         i {
             font-size: 3rem;
@@ -26,7 +27,7 @@
 
             #km-progress-bar {
                 height: 4px;
-                width: 90%;
+                width: 100%;
                 border-radius: 4px;
                 margin: 4px;
                 background-color: var(--light);
@@ -34,12 +35,12 @@
                 z-index: 5;
 
                 &::before {
-                    position: fixed;
+                    display: block;
 
                     content: ' ';
                     z-index: 10;
                     height: 4px;
-                    width: calc(calc(18.5% / 100) * var(--km-percentage));
+                    width: var(--km-percentage);
                     border-radius: 4px;
                     background-color: var(--green);
                 }

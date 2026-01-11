@@ -15,6 +15,7 @@ export class MyDB {
     connect() {
         return new Promise((resolve, reject) => {
             const request = indexedDB.open('WWWProject', this.#dbVersion);
+            let firstTimeLaunch = false
 
             request.onupgradeneeded = (event) => {
                 const db = event.target.result;
@@ -24,11 +25,20 @@ export class MyDB {
 
                     const osPlace = db.createObjectStore(this.#osPlace, {keyPath: 'id', autoIncrement: true});
                     osPlace.createIndex('diaryInd', 'diary')
+
+                    firstTimeLaunch = true;
                 }
             }
 
-            request.onsuccess = (event) => {
+            request.onsuccess = async (event) => {
                 this.#db = event.target.result;
+
+                if(firstTimeLaunch) {
+                    const defaultDiary = new Diary("Default", "Generated", 100);
+                    const defaultDiaryId = await this.addDiary(defaultDiary)
+                    localStorage.setItem("current.diary.id", defaultDiaryId.toString())
+                }
+
                 resolve();
             }
         })

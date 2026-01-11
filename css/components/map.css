@@ -5,3 +5,10 @@
         width: 100%;
     }
 }
+
+#logo-attribution {
+    position: fixed;
+
+    bottom: 10px;
+    left: 20px;
+}

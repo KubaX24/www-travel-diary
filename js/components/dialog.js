@@ -58,33 +58,3 @@ export class Dialog {
         `
     }
 }
-
-export class DialogBuilder {
-    static createAddPlace() {
-        return `
-            <form>
-                <div>
-                    <label for="dialog-place-name">Name</label>
-                    <input type="text" placeholder="Name" id="dialog-place-name">
-                </div>
-                <div>
-                    <label for="dialog-place-description">Description</label>
-                    <textarea placeholder="Description" id="dialog-place-description"></textarea>
-                </div>
-                <div>
-                    <label for="dialog-place-distance">Distance in KM</label>
-                    <input type="number" placeholder="Distance" id="dialog-place-distance">
-                </div>
-                <div>
-                    <label for="dialog-place-start-date">Start date</label>
-                    <input type="date" id="dialog-place-start-date">
-                </div>
-                <div>
-                    <label for="dialog-place-end-date">End date</label>
-                    <input type="date" id="dialog-place-end-date">
-                </div>
-                <button class="dialog-submit" data-select="0" type="button">Add</button>
-            </form>
-        `
-    }
-}

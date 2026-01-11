@@ -10,7 +10,7 @@ export class AddPlace {
         this.#element = document.getElementById(elementId);
 
         this.#addButton = document.createElement('button')
-        this.#addButton.innerText = "Add"
+        this.#addButton.innerHTML = '<i class="fa-solid fa-plus"></i> Add place'
         this.#addButton.addEventListener('click', () => this.#hideAddButtonAndShowControl())
         this.#element.appendChild( this.#addButton)
 

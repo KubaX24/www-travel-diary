@@ -5,11 +5,13 @@ export class Map {
     #locationMarker;
     #markers = [];
 
+    #API_KEY = "hoWx1wjtgsv1EawbFPeJI8gkz83f3GQWUWEYyik2IW0"
+
     /**
      * @param elementId {String}
      * @param apiKey {String}
      */
-    constructor(elementId, apiKey) {
+    constructor(elementId) {
         this.#element = document.getElementById(elementId)
         this.drawMap()
     }
@@ -17,7 +19,21 @@ export class Map {
     drawMap() {
         this.#map = new maplibregl.Map({
             container: this.#element.id,
-            style: 'https://demotiles.maplibre.org/globe.json',
+            style: {
+                version: 8,
+                sources: {
+                    'basic-tiles': {
+                        type: 'raster',
+                        url: `https://api.mapy.com/v1/maptiles/basic/tiles.json?apikey=${this.#API_KEY}`,
+                        tileSize: 512,
+                    },
+                },
+                layers: [{
+                    id: 'tiles',
+                    type: 'raster',
+                    source: 'basic-tiles',
+                }],
+            },
             center: [15.47, 49.80],
             zoom: 7
         })
@@ -27,12 +43,29 @@ export class Map {
      * @param place {Place}
      * @param onClick {Function}
      */
-    setPlace(place, onClick) {
-        const marker = new maplibregl.Marker()
-            .setLngLat(place.location)
-            .addTo(this.#map)
+    async setPlace(place, onClick) {
+        const el = document.createElement('div')
+        el.className = 'marker'
+        el.style.backgroundImage = `url(imgs/pin.svg)`
+        el.style.backgroundSize = "contain"
+        el.style.backgroundRepeat = "no-repeat"
+        el.style.width = `35px`
+        el.style.height = `40px`
 
-        marker.getElement().addEventListener('click', onClick)
+        const marker = new maplibregl.Marker({
+            element: el,
+            anchor: "bottom",
+            offset: [0, 17]
+        }).setLngLat(place.location).addTo(this.#map)
+
+        marker.getElement().addEventListener('click', () => {
+            for (let m of this.#markers) {
+                m.getElement().style.backgroundImage = `url(imgs/pin.svg)`
+            }
+
+            el.style.backgroundImage = `url(imgs/pin-selected.svg)`
+            onClick()
+        })
         this.#markers.push(marker)
     }
     

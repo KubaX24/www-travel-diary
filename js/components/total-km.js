@@ -38,7 +38,10 @@ export class TotalKm {
             <div id="km-goal">${this.#diary.goalKm} km</div>
         `
 
-        this.#element.style.setProperty("--km-percentage", this.#diary.calcGoalPercentage())
+        let percentage = this.#diary.calcGoalPercentage()
+        if (percentage > 100) percentage = 100
+
+        this.#element.style.setProperty("--km-percentage",  percentage + "%")
         this.#element.innerHTML = elTemplate
     }
 

@@ -7,4 +7,25 @@
     h2, p {
         margin: 0;
     }
+
+    #chips {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+
+        .chip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            background-color: var(--green-gray);
+            color: var(--dark);
+
+            i, p {
+                font-size: 1rem;
+            }
+        }
+    }
 }

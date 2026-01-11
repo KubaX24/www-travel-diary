@@ -24,17 +24,20 @@ export class IndexView extends View {
                     <div id="add-place"></div>
                 </div>
             </main>
+            <div id="logo-attribution">
+                <a href="https://mapy.com/" target="_blank"><img height="30px" src="https://api.mapy.com/img/api/logo.svg"  alt="Logo of mapy.com"></a>
+            </div>
         `
     }
 
     async logic() {
         const detail = new Detail("detail")
-        const map = new Map("map", "asd")
+        const map = new Map("map")
         const totalKm = new TotalKm("km")
         const header = new Header("header")
         const addPlace = new AddPlace("add-place")
 
-        const diary = await this.db.getDiaryById(11)
+        const diary = await this.db.getDiaryById(Number.parseInt(localStorage.getItem("current.diary.id")))
         header.setDiaryName(diary.name)
 
         const places = await this.db.getPlacesByDiaryId(diary.id)

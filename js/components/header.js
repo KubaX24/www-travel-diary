@@ -13,10 +13,10 @@ export class Header {
      * @param diaryName {String}
      */
     setDiaryName(diaryName) {
-        this.#element.getElementsByTagName('h1')[0].innerText = diaryName;
+        this.#element.getElementsByTagName('h1')[0].innerHTML = `<i class="fa-solid fa-book"></i> <p>${diaryName}</p>`;
     }
 
     setOnClickListener(onClick) {
-        this.#element.addEventListener('click', onClick)
+        this.#element.getElementsByTagName('h1')[0].addEventListener('click', onClick)
     }
 }

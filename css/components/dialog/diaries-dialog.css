@@ -1,7 +1,7 @@
 .dialog {
     .dialog-diary-select {
         margin: 2px;
-        width: 32%;
+        width: 275px;
         background-color: var(--light);
         outline: none;
         border: none;
