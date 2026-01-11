@@ -8,14 +8,14 @@ export class Place {
     dateStart;
     dateEnd;
 
-    constructor(id, location, name, description, distanceKm, dateStart, dateEnd) {
-        this.id = id;
+    constructor(location, name, description, distanceKm, dateStart, dateEnd, id) {
         this.location = location;
         this.name = name;
         this.description = description;
         this.distanceKm = distanceKm;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
+        this.id = id;
     }
 
     getLat() {

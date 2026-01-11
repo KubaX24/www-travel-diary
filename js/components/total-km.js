@@ -3,11 +3,11 @@ export class TotalKm {
     #diary;
     #element;
 
-    constructor(elementId, diary) {
+    /**
+     * @param elementId {String}
+     */
+    constructor(elementId) {
         this.#element = document.getElementById(elementId);
-        this.#diary = diary;
-
-        this.updateKm()
     }
 
     /**

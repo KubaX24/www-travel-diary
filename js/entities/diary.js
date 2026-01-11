@@ -5,22 +5,31 @@ export class Diary {
     author;
     goalKm;
 
-    constructor(id, name, author, goalKm) {
-        this.id = id;
+    #places;
+
+    constructor(name, author, goalKm, id) {
         this.name = name;
         this.author = author;
         this.goalKm = goalKm;
+        this.id = id;
+    }
+
+    /**
+     * @param places {Array<Place>}
+     */
+    setPlaces(places) {
+        this.#places = places;
     }
 
     calcTotalKM() {
-        return 0
+        return this.#places.reduce((accumulator, value) => accumulator + value.distanceKm, 0)
     }
 
     placesCount() {
-        return 0
+        return this.#places.length
     }
 
     calcGoalPercentage() {
-        return 50
+        return (this.calcTotalKM() / this.goalKm) * 100
     }
 }

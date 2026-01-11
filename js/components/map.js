@@ -6,17 +6,10 @@ export class Map {
     /**
      * @param elementId {String}
      * @param apiKey {String}
-     * @param places {Array<Place>}
      */
-    constructor(elementId, apiKey, places) {
+    constructor(elementId, apiKey) {
         this.#element = document.getElementById(elementId)
         this.drawMap()
-
-        places.forEach(value => {
-            this.setPlace(value, () => {
-                console.log("Test")
-            })
-        })
     }
 
     drawMap() {

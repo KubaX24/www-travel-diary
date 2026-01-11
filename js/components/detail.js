@@ -4,11 +4,9 @@ export class Detail {
 
     /**
      * @param elementId {String}
-     * @param place {Place}
      */
-    constructor(elementId, place) {
+    constructor(elementId) {
         this.#element = document.getElementById(elementId)
-        this.showPlace(place)
     }
 
     /**
