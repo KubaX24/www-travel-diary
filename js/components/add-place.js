@@ -10,7 +10,7 @@ export class AddPlace {
         this.#element = document.getElementById(elementId);
 
         this.#addButton = document.createElement('button')
-        this.#addButton.innerHTML = '<i class="fa-solid fa-plus"></i> Add place'
+        this.#addButton.innerHTML = '<i class="fa-solid fa-plus"></i> Přidat místo'
         this.#addButton.addEventListener('click', () => this.#hideAddButtonAndShowControl())
         this.#element.appendChild( this.#addButton)
 
@@ -20,7 +20,7 @@ export class AddPlace {
         this.#element.appendChild( this.#okButton)
 
         this.#cancelButton = document.createElement('button')
-        this.#cancelButton.innerText = "Cancel"
+        this.#cancelButton.innerText = "Zrušit"
         this.#cancelButton.addEventListener('click', () => this.#showAddButtonAndHideControl())
         this.#element.appendChild( this.#cancelButton)
 

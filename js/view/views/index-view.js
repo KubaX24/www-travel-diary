@@ -6,6 +6,7 @@ import {Header} from "../../components/header.js";
 import {AddPlace} from "../../components/add-place.js";
 import {DiariesDialog} from "../../components/dialogs/diaries-dialog.js";
 import {AddPlaceDialog} from "../../components/dialogs/add-place-dialog.js";
+import {Constants} from "../../constants.js";
 
 export class IndexView extends View {
 
@@ -14,7 +15,7 @@ export class IndexView extends View {
             <main>
                 <div id="header-map-container">
                     <header id="header">
-                        <h1>Title</h1>
+                        <h1>Nadpis</h1>
                     </header>
                     <div id="map"></div>
                 </div>
@@ -37,7 +38,7 @@ export class IndexView extends View {
         const header = new Header("header")
         const addPlace = new AddPlace("add-place")
 
-        const diary = await this.db.getDiaryById(Number.parseInt(localStorage.getItem("current.diary.id")))
+        const diary = await this.db.getDiaryById(Number.parseInt(localStorage.getItem(Constants.LOCAL_STORAGE_CURRENT_DIARY_ID)))
         header.setDiaryName(diary.name)
 
         const places = await this.db.getPlacesByDiaryId(diary.id)
@@ -50,7 +51,7 @@ export class IndexView extends View {
         diary.setPlaces(places)
         totalKm.setDiary(diary)
 
-        localStorage.setItem("current.diary.id", diary.id)
+        localStorage.setItem(Constants.LOCAL_STORAGE_CURRENT_DIARY_ID, diary.id)
 
         addPlace.addPlaceListener(() => { map.addLocationMarker() })
         addPlace.addCancelListener(() => { map.removeLocationMarker() })

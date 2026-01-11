@@ -1,5 +1,6 @@
 import {Place} from "../entities/place.js";
 import {Diary} from "../entities/diary.js";
+import {Constants} from "../constants.js";
 
 export class MyDB {
 
@@ -8,13 +9,11 @@ export class MyDB {
     #osPlace = 'Place';
     #db;
 
-    constructor() {
-
-    }
+    #DB_NAME = 'travel-diary'
 
     connect() {
         return new Promise((resolve, reject) => {
-            const request = indexedDB.open('WWWProject', this.#dbVersion);
+            const request = indexedDB.open(this.#DB_NAME, this.#dbVersion);
             let firstTimeLaunch = false
 
             request.onupgradeneeded = (event) => {
@@ -36,7 +35,7 @@ export class MyDB {
                 if(firstTimeLaunch) {
                     const defaultDiary = new Diary("Default", "Generated", 100);
                     const defaultDiaryId = await this.addDiary(defaultDiary)
-                    localStorage.setItem("current.diary.id", defaultDiaryId.toString())
+                    localStorage.setItem(Constants.LOCAL_STORAGE_CURRENT_DIARY_ID, defaultDiaryId.toString())
                 }
 
                 resolve();

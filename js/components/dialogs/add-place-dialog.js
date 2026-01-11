@@ -1,5 +1,6 @@
 import {Dialog} from "../dialog.js";
 import {Place} from "../../entities/place.js";
+import {Constants} from "../../constants.js";
 
 export class AddPlaceDialog {
 
@@ -16,7 +17,7 @@ export class AddPlaceDialog {
     }
 
     init() {
-        const addDialog = new Dialog("add-place", "Add place", this.template())
+        const addDialog = new Dialog("add-place", "Přidat místo", this.template())
 
         addDialog.addSubmitListener(() => {
             this.onPlaceCreate()
@@ -42,7 +43,7 @@ export class AddPlaceDialog {
             distanceKm < 0) return;
 
         const newPlace = new Place(
-            [localStorage.getItem("location.lng"), localStorage.getItem("location.lat")],
+            [localStorage.getItem(Constants.LOCAL_STORAGE_LOCATION_LNG), localStorage.getItem(Constants.LOCAL_STORAGE_LOCATION_LAT)],
             name,
             description,
             distanceKm,
@@ -50,7 +51,7 @@ export class AddPlaceDialog {
             endDate
         )
 
-        this.#db.addPlace(newPlace, Number.parseInt(localStorage.getItem("current.diary.id")))
+        this.#db.addPlace(newPlace, Number.parseInt(localStorage.getItem(Constants.LOCAL_STORAGE_CURRENT_DIARY_ID)))
         this.#map.setPlace(newPlace, () => {this.#detail.showPlace(newPlace)})
         this.#totalKm.addPlace(newPlace)
     }
@@ -59,23 +60,23 @@ export class AddPlaceDialog {
         return `
             <form>
                 <div>
-                    <label for="dialog-place-name">Name</label>
-                    <input type="text" placeholder="Name" id="dialog-place-name">
+                    <label for="dialog-place-name">Jméno</label>
+                    <input type="text" placeholder="Výlet..." id="dialog-place-name">
                 </div>
                 <div>
-                    <label for="dialog-place-description">Description</label>
-                    <textarea placeholder="Description" id="dialog-place-description"></textarea>
+                    <label for="dialog-place-description">Popis</label>
+                    <textarea placeholder="Bylo to..." id="dialog-place-description"></textarea>
                 </div>
                 <div>
-                    <label for="dialog-place-distance">Distance in KM</label>
-                    <input type="number" placeholder="Distance" id="dialog-place-distance">
+                    <label for="dialog-place-distance">Vzdálenost v km</label>
+                    <input type="number" placeholder="10" id="dialog-place-distance">
                 </div>
                 <div>
-                    <label for="dialog-place-start-date">Start date</label>
+                    <label for="dialog-place-start-date">Datum začátku</label>
                     <input type="date" id="dialog-place-start-date" value="${new Date().toISOString().slice(0, 10)}">
                 </div>
                 <div>
-                    <label for="dialog-place-end-date">End date</label>
+                    <label for="dialog-place-end-date">Datum konce</label>
                     <input type="date" id="dialog-place-end-date" value="${new Date().toISOString().slice(0, 10)}">
                 </div>
                 <button class="dialog-submit" data-select="0" type="button">Add</button>

@@ -1,6 +1,7 @@
 import {Dialog} from "../dialog.js";
 import {Data} from "../../utils/data.js";
 import {Diary} from "../../entities/diary.js";
+import {Constants} from "../../constants.js";
 
 export class DiariesDialog {
 
@@ -19,7 +20,7 @@ export class DiariesDialog {
     }
 
     async init() {
-        const selectDiaryDialog = new Dialog("select-diary", "Select diary", this.dialogBody(await this.getDiaries()).innerHTML)
+        const selectDiaryDialog = new Dialog("select-diary", "Deníky", this.dialogBody(await this.getDiaries()).innerHTML)
 
         selectDiaryDialog.addSubmitListener(async (id) => {
             switch (Number.parseInt(id)) {
@@ -50,11 +51,6 @@ export class DiariesDialog {
         const goalKm = Number.parseInt(document.getElementById("dialog-diary-goal-km").value);
 
         if (name === "" || author === "" || isNaN(goalKm) || goalKm < 0) return;
-
-        const diaries = await this.getDiaries()
-        if (diaries.some(d => d.name === name)) return alert(
-            "Diary with this name already exists"
-        )
 
         const newDiary = new Diary(
             name,
@@ -98,7 +94,7 @@ export class DiariesDialog {
         this.#totalKm.setDiary(diary)
         this.#detail.showSelectPlaceText()
 
-        localStorage.setItem("current.diary.id", diary.id)
+        localStorage.setItem(Constants.LOCAL_STORAGE_CURRENT_DIARY_ID, diary.id)
     }
 
 
@@ -111,25 +107,25 @@ export class DiariesDialog {
         let template = document.createElement('div')
 
         template.innerHTML = `
-                <h3 id="show-create-diary"><i class="fa-solid fa-angle-right"></i> Create diary</h3>
+                <h3 id="show-create-diary"><i class="fa-solid fa-angle-right"></i> Vytvořit deník</h3>
                 <form id="create-diary" style="display: none">
                     <div>
-                        <label for="dialog-diary-name">Name</label>
+                        <label for="dialog-diary-name">Jméno</label>
                         <input type="text" id="dialog-diary-name">
                     </div>
                     <div>
-                        <label for="dialog-diary-author">Author</label>
+                        <label for="dialog-diary-author">Autor</label>
                         <input type="text" id="dialog-diary-author">
                     </div>
                     <div>
-                        <label for="dialog-diary-goal-km">Goal in KM</label>
+                        <label for="dialog-diary-goal-km">Cíl v KM</label>
                         <input type="number" id="dialog-diary-goal-km">
                     </div>
-                    <button type="button" data-select="-1" class="dialog-submit">Create</button>
+                    <button type="button" data-select="-1" class="dialog-submit">Vytvořit</button>
                     <hr>
                 </form>
                 
-                <h3 id="show-import-diary"><i class="fa-solid fa-angle-right"></i> Import diary</h3>
+                <h3 id="show-import-diary"><i class="fa-solid fa-angle-right"></i> Importovat deník</h3>
                 <form id="import-diary" style="display: none">
                     <div>
                         <label for="dialog-diary-json">JSON</label>

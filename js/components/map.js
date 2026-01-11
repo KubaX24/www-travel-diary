@@ -1,3 +1,5 @@
+import {Constants} from "../constants.js";
+
 export class Map {
 
     #element;
@@ -81,14 +83,14 @@ export class Map {
             .setLngLat([cameraPosition.lng, cameraPosition.lat])
             .addTo(this.#map);
 
-        localStorage.setItem("location.lat", cameraPosition.lat)
-        localStorage.setItem("location.lng", cameraPosition.lng)
+        localStorage.setItem(Constants.LOCAL_STORAGE_LOCATION_LAT, cameraPosition.lat)
+        localStorage.setItem(Constants.LOCAL_STORAGE_LOCATION_LNG, cameraPosition.lng)
 
         this.#locationMarker.on('dragend', () => {
             const lngLat = this.#locationMarker.getLngLat();
 
-            localStorage.setItem("location.lat", lngLat.lat)
-            localStorage.setItem("location.lng", lngLat.lng)
+            localStorage.setItem(Constants.LOCAL_STORAGE_LOCATION_LAT, cameraPosition.lat)
+            localStorage.setItem(Constants.LOCAL_STORAGE_LOCATION_LNG, cameraPosition.lng)
         });
     }
 

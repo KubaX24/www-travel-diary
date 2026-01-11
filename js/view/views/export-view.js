@@ -17,7 +17,7 @@ export class ExportView extends View {
 
         await new Data(this.db).export(diaryId)
             .then(content => this.setContent(content))
-            .catch(() => this.setContent("No diary found!"))
+            .catch(() => this.setContent("Deník nebyl nalezen!"))
     }
 
     setContent(content) {

@@ -40,7 +40,7 @@ export class Detail {
     }
 
     showSelectPlaceText() {
-        this.#element.innerText = "Select place on map to see details."
+        this.#element.innerText = "Vyberte bod na mapě pro zobraezní detailů."
     }
 
     /**
