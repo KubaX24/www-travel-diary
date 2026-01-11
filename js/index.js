@@ -11,10 +11,6 @@ import {MyDB} from "./my-db.js";
 
 const db = new MyDB();
 
-const place = new Place([15.00, 49.70], "Test", "asdmaksd", 10.3, new Date("10-12-2025"), new Date("11-12-2025"));
-const place2 = new Place([15.10, 49.50], "It is a test", "sd3fsd sd023023s dfsd023", 20.3, new Date("11-01-2025"), new Date("12-01-2025"));
-const diary = new Diary("Testasd", "Ja", 1000)
-
 const detail = new Detail("detail")
 const map = new Map("map", "asd")
 const totalKm = new TotalKm("km")
@@ -52,7 +48,7 @@ addPlace.addCancelListener(() => {
 })
 
 addPlace.addOkListener(() => {
-    const addDialog = new Dialog("add-place-dialog", "Add place", DialogBuilder.createAddPlace())
+    const addDialog = new Dialog("add-place", "Add place", DialogBuilder.createAddPlace())
     addDialog.addSubmitListener(async () => {
         const newPlace = new Place(
             [localStorage.getItem("location.lng"), localStorage.getItem("location.lat")],
@@ -72,4 +68,72 @@ addPlace.addOkListener(() => {
 
     addDialog.open()
     map.removeLocationMarker()
+})
+
+header.setOnClickListener(async () => {
+    const diaries = await db.getDiaries()
+    let template = document.createElement('div')
+
+    template.innerHTML = `
+        <form id="create-diary">
+            <h3>Create diary</h3>
+            <div>
+                <label for="dialog-diary-name">Name</label>
+                <input type="text" id="dialog-diary-name">
+            </div>
+            <div>
+                <label for="dialog-diary-author">Author</label>
+                <input type="text" id="dialog-diary-author">
+            </div>
+            <div>
+                <label for="dialog-diary-goal-km">Goal in KM</label>
+                <input type="number" id="dialog-diary-goal-km">
+            </div>
+            <button type="button" data-select="-1" class="dialog-submit">Create</button>
+        </form>
+    `
+
+    diaries.forEach(diary => {
+        template.innerHTML += `<button class="dialog-submit" data-select="${diary.id}">${diary.name}</button>`
+    })
+
+    const selectDiaryDialog = new Dialog("select-diary", "Select diary", template.innerHTML)
+    selectDiaryDialog.addSubmitListener(async (id) => {
+        if (Number.parseInt(id) < 0) {
+            const newDiary = new Diary(
+                document.getElementById("dialog-diary-name").value,
+                document.getElementById("dialog-diary-author").value,
+                document.getElementById("dialog-diary-goal-km").value
+            )
+
+            newDiary.id = await db.addDiary(newDiary);
+            console.log(newDiary.id)
+
+            header.setDiaryName(newDiary.name)
+            map.removeAllPlaces()
+            totalKm.setDiary(newDiary)
+
+            localStorage.setItem("current.diary.id", newDiary.id)
+        } else {
+            const diary = await db.getDiaryById(Number.parseInt(id))
+
+            header.setDiaryName(diary.name)
+
+            const places = await db.getPlacesByDiaryId(diary.id)
+            map.removeAllPlaces()
+            places.forEach(place => {
+                map.setPlace(place, () => {
+                    detail.showPlace(place)
+                })
+            })
+
+            diary.setPlaces(places)
+            totalKm.setDiary(diary)
+            localStorage.setItem("current.diary.id", diary.id)
+        }
+
+        selectDiaryDialog.close()
+    })
+
+    selectDiaryDialog.open()
 })

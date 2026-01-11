@@ -120,6 +120,7 @@ export class MyDB {
             const os = transaction.objectStore(this.#osDiary);
             os.get(id).onsuccess = (event) => {
                 const result = event.target.result;
+                console.log(result)
                 const diary = new Diary(result.name, result.author, result.goalKm, result.id);
 
                 resolve(diary);

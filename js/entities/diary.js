@@ -5,7 +5,7 @@ export class Diary {
     author;
     goalKm;
 
-    #places;
+    #places = [];
 
     constructor(name, author, goalKm, id) {
         this.name = name;

@@ -3,6 +3,7 @@ export class Map {
     #element;
     #map;
     #locationMarker;
+    #markers = [];
 
     /**
      * @param elementId {String}
@@ -32,6 +33,12 @@ export class Map {
             .addTo(this.#map)
 
         marker.getElement().addEventListener('click', onClick)
+        this.#markers.push(marker)
+    }
+    
+    removeAllPlaces() {
+        this.#markers.forEach(marker => marker.remove())
+        this.#markers = []
     }
 
     addLocationMarker() {

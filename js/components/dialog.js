@@ -25,9 +25,11 @@ export class Dialog {
                 this.close()
             })
 
-            document.querySelector('.dialog-submit').addEventListener('click', (e) => {
-                const selectId = e.currentTarget.dataset.select
-                this.#submitListener(selectId)
+            document.querySelectorAll('.dialog-submit').forEach((element) => {
+                element.addEventListener('click', (e) => {
+                    const selectId = e.currentTarget.dataset.select
+                    this.#submitListener(selectId)
+                })
             })
         }
     }
