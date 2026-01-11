@@ -2,6 +2,7 @@ export class Map {
 
     #element;
     #map;
+    #locationMarker;
 
     /**
      * @param elementId {String}
@@ -31,5 +32,28 @@ export class Map {
             .addTo(this.#map)
 
         marker.getElement().addEventListener('click', onClick)
+    }
+
+    addLocationMarker() {
+        const cameraPosition = this.#map.getCenter()
+
+        this.#locationMarker = new maplibregl.Marker({draggable: true})
+            .setLngLat([cameraPosition.lng, cameraPosition.lat])
+            .addTo(this.#map);
+
+        localStorage.setItem("location.lat", cameraPosition.lat)
+        localStorage.setItem("location.lng", cameraPosition.lng)
+
+        this.#locationMarker.on('dragend', () => {
+            const lngLat = this.#locationMarker.getLngLat();
+
+            localStorage.setItem("location.lat", lngLat.lat)
+            localStorage.setItem("location.lng", lngLat.lng)
+        });
+    }
+
+    removeLocationMarker() {
+        if (this.#locationMarker !== undefined)
+            this.#locationMarker.remove()
     }
 }

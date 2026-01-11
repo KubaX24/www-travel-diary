@@ -21,6 +21,13 @@ export class Diary {
         this.#places = places;
     }
 
+    /**
+     * @param place {Place}
+     */
+    addPlace(place) {
+        this.#places.push(place)
+    }
+
     calcTotalKM() {
         return this.#places.reduce((accumulator, value) => accumulator + value.distanceKm, 0)
     }

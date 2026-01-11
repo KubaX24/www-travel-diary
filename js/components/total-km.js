@@ -18,6 +18,14 @@ export class TotalKm {
         this.updateKm()
     }
 
+    /**
+     *  @param place {Place}
+     */
+    addPlace(place) {
+        this.#diary.addPlace(place)
+        this.updateKm()
+    }
+
     updateKm() {
         const elTemplate = `
             <div id="km-info">

@@ -5,6 +5,7 @@
 @import "components/map.css";
 @import "components/detail.css";
 @import "components/km.css";
+@import "components/dialog.css";
 
 :root {
     --light: #EBEDF4;

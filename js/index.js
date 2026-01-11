@@ -4,6 +4,8 @@ import {Detail}  from "./components/detail.js";
 import {Map}  from "./components/map.js";
 import {TotalKm} from "./components/total-km.js";
 import {Header} from "./components/header.js";
+import {AddPlace} from "./components/add-place.js";
+import {Dialog, DialogBuilder} from "./components/dialog.js";
 
 import {MyDB} from "./my-db.js";
 
@@ -17,6 +19,7 @@ const detail = new Detail("detail")
 const map = new Map("map", "asd")
 const totalKm = new TotalKm("km")
 const header = new Header("header")
+const addPlace = new AddPlace("add-place")
 
 db.connect().then(async () => {
     // db.addDiary(diary).then(id => {
@@ -36,4 +39,37 @@ db.connect().then(async () => {
 
     diary.setPlaces(places)
     totalKm.setDiary(diary)
+
+    localStorage.setItem("current.diary.id", diary.id)
 });
+
+addPlace.addPlaceListener(() => {
+    map.addLocationMarker()
+})
+
+addPlace.addCancelListener(() => {
+    map.removeLocationMarker()
+})
+
+addPlace.addOkListener(() => {
+    const addDialog = new Dialog("add-place-dialog", "Add place", DialogBuilder.createAddPlace())
+    addDialog.addSubmitListener(async () => {
+        const newPlace = new Place(
+            [localStorage.getItem("location.lng"), localStorage.getItem("location.lat")],
+            document.getElementById("dialog-place-name").value,
+            document.getElementById("dialog-place-description").value,
+            Number.parseInt(document.getElementById("dialog-place-distance").value),
+            document.getElementById("dialog-place-start-date").value,
+            document.getElementById("dialog-place-end-date").value
+        )
+
+        db.addPlace(newPlace, Number.parseInt(localStorage.getItem("current.diary.id")))
+        map.setPlace(newPlace, () => {detail.showPlace(newPlace)})
+        totalKm.addPlace(newPlace)
+
+        addDialog.close()
+    })
+
+    addDialog.open()
+    map.removeLocationMarker()
+})
