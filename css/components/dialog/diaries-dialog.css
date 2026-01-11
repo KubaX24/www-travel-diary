@@ -1,0 +1,28 @@
+.dialog {
+    .dialog-diary-select {
+        margin: 2px;
+        width: 32%;
+        background-color: var(--light);
+        outline: none;
+        border: none;
+        border-radius: 4px;
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 1.7rem;
+
+            i {
+                font-size: .9rem;
+                color: var(--dark);
+            }
+
+            p {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+            }
+        }
+    }
+}

@@ -28,4 +28,8 @@ export class Detail {
         descriptionEl.innerText = place.description
         this.#element.appendChild(descriptionEl)
     }
+
+    showSelectPlaceText() {
+        this.#element.innerText = "Select place on map to see details."
+    }
 }

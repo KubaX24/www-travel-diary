@@ -1,3 +1,5 @@
+@import "./dialog/diaries-dialog.css";
+
 .dialog-back {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(3px);
@@ -57,6 +59,30 @@
     }
 
     .dialog-content {
+        overflow-y: scroll;
         margin: 10px;
+        max-height: 75vh;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        textarea {
+            height: 100px;
+            min-width: 500px;
+        }
+
+        button {
+            width: 100px;
+            align-self: end;
+        }
     }
 }
