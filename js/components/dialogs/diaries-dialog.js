@@ -137,11 +137,15 @@ export class DiariesDialog {
             `
 
         diaries.forEach(diary => {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', 'export');
+            url.searchParams.set('diaryId', diary.id);
+
             template.innerHTML += `
                 <button class="dialog-submit dialog-diary-select" data-select="${diary.id}">
                     <div>
                         <h3>${diary.name}</h3>
-                        <a href="${window.location.href}&page=export&diaryId=${diary.id}"><i class="fa-solid fa-file-export"></i></a>
+                        <a href="${url.toString()}"><i class="fa-solid fa-file-export"></i></a>
                     </div> 
                     <div>
                         <p><i class="fa-solid fa-user"></i> ${diary.author}</p>

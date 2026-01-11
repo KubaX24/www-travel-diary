@@ -26,7 +26,7 @@ export class Map {
                 sources: {
                     'basic-tiles': {
                         type: 'raster',
-                        url: `https://api.mapy.com/v1/maptiles/basic/tiles.json?apikey=${this.#API_KEY}`,
+                        url: `https://api.mapy.com/v1/maptiles/outdoor/tiles.json?apikey=${this.#API_KEY}`,
                         tileSize: 512,
                     },
                 },
