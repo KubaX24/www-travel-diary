@@ -89,8 +89,8 @@ export class Map {
         this.#locationMarker.on('dragend', () => {
             const lngLat = this.#locationMarker.getLngLat();
 
-            localStorage.setItem(Constants.LOCAL_STORAGE_LOCATION_LAT, cameraPosition.lat)
-            localStorage.setItem(Constants.LOCAL_STORAGE_LOCATION_LNG, cameraPosition.lng)
+            localStorage.setItem(Constants.LOCAL_STORAGE_LOCATION_LAT, lngLat.lat)
+            localStorage.setItem(Constants.LOCAL_STORAGE_LOCATION_LNG, lngLat.lng)
         });
     }
 
